@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import logger from 'redux-logger'
 import rootReducer from './reducers';
 import App from './App';
+import throttle from 'lodash/throttle';
 
 
 const logAction = store => {
@@ -66,7 +67,9 @@ const store = createStore(
 // console.log({ store });
 
 
-store.subscribe(() => saveToLocalStorage(store.getState()));
+store.subscribe(throttle(() => {
+    saveToLocalStorage(store.getState());
+}, 2000));
 
 /**
 
