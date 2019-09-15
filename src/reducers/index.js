@@ -1,15 +1,15 @@
 
 import { combineReducers } from 'redux';
-import counterReducer from './counter';
-import loggedReducer from './isLogged';
-import loaderReducer from './isLoading';
-import dataReducer from './data';
+import counter from './counter';
+import isLogged from './isLogged';
+import isLoading from './isLoading';
+import data from './data';
 
 const rootReducer = combineReducers({
-    counter: counterReducer,
-    isLogged: loggedReducer,
-    isLoading: loaderReducer,
-    data: dataReducer
+    counter,
+    isLogged,
+    isLoading,
+    data
 });
 
 export default rootReducer;

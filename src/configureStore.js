@@ -1,11 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import rootReducer from './reducers';
 import throttle from 'lodash/throttle';
+import rootReducer from './reducers';
+import { saveToLocalStorage, loadFromLocalStorage } from './localStorage';
 
 const configureStore = () => {
-
     const logAction = store => {
         return next => {
             return action => {
@@ -24,28 +24,7 @@ const configureStore = () => {
         return result;
     };
 
-    function saveToLocalStorage(state) {
-        try {
-            const serializedState = JSON.stringify(state);
-            localStorage.setItem('state', serializedState);
-
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    function loadFromLocalStorage() {
-        try {
-            const serializedState = localStorage.getItem('state');
-            if (serializedState === null) return undefined;
-            return JSON.parse(serializedState);
-
-        } catch (e) {
-            console.log(e);
-            return undefined;
-        }
-    }
-
+    // read already saved state data from local storage
     const persistedState = loadFromLocalStorage();
 
     // this will work on both firefox and chrome
@@ -55,10 +34,19 @@ const configureStore = () => {
     const store = createStore(
         rootReducer,
         persistedState, // initial store values (it will override the rootReducer state values)
-        composeEnhancers(applyMiddleware(logger, thunk, logAction, ownLogger)));
+        composeEnhancers(
+            applyMiddleware(logger, thunk, logAction, ownLogger) // middleware for logging, thunk...
+        )
+    );
 
+    // to find which mode is running
+    console.log(process.env.NODE_ENV);
+    if (process.env.NODE_ENV === 'development') {
+        console.log('development server is running...');
+    }
 
     store.subscribe(throttle(() => {
+        // write current state data to local storage
         saveToLocalStorage(store.getState());
     }, 2000));
 

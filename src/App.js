@@ -60,7 +60,7 @@ function App() {
         </button>
 
         <button
-          className='btn btn-primary'
+          className='btn btn-success'
           onClick={() => dispatch(incrementByValue(5))}
         >
           increment by value {counter}
