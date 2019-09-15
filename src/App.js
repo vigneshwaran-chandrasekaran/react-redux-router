@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.scss';
+// import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector, useDispatch, useStore } from 'react-redux';
 import {

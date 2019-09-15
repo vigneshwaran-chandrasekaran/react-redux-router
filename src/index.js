@@ -28,14 +28,45 @@ const ownLogger = store => next => action => {
     return result;
 };
 
+
+function saveToLocalStorage(state) {
+    try {
+        const serializedState = JSON.stringify(state);
+        localStorage.setItem('state', serializedState);
+
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+function loadFromLocalStorage() {
+    try {
+        const serializedState = localStorage.getItem('state');
+        if (serializedState === null) return undefined;
+        return JSON.parse(serializedState);
+
+    } catch (e) {
+        console.log(e);
+        return undefined;
+    }
+}
+
+const persistedState = loadFromLocalStorage();
+
+// this will work on both firefox and chrome
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 // STORE
 const store = createStore(
     rootReducer,
-    compose(applyMiddleware(logger, thunk, logAction, ownLogger),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+    persistedState,
+    composeEnhancers(applyMiddleware(logger, thunk, logAction, ownLogger)));
 
 
 // console.log({ store });
+
+
+store.subscribe(() => saveToLocalStorage(store.getState()));
 
 /**
 
