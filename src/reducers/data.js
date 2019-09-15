@@ -10,8 +10,10 @@ const initialUserState = {
 const dataReducer = (state = initialUserState, action) => {
     switch (action.type) {
         case 'LOADED':
-            console.log('redux jsonData', action.payload);
-            return { ...state, arr: action.payload };
+            return {
+                ...state,
+                arr: action.payload
+            };
         default:
             return state;
     }

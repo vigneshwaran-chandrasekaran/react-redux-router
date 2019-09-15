@@ -1,5 +1,5 @@
 import React from 'react';
-// import './App.css';
+import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector, useDispatch, useStore } from 'react-redux';
 import {
@@ -10,6 +10,8 @@ import {
   decrementByValue,
   loadAPIData
 } from './actions';
+
+import Root from './pages/Root';
 
 function App() {
 
@@ -23,14 +25,14 @@ function App() {
   const store = useStore();
 
   let arr = data.arr;
-  console.log(data);
-  console.log({ isLoading });
-  console.log({ counter });
-  console.log({ isLogged });
+  // console.log(data);
+  // console.log({ isLoading });
+  // console.log({ counter });
+  // console.log({ isLogged });
 
 
   function Lists({ arrs }) {
-    console.log({ arrs });
+    // console.log({ arrs });
     const todoItems = arrs.map((todo) => <li key={todo.id}>{todo.title}</li>);
 
     return (
@@ -41,7 +43,7 @@ function App() {
 
 
   function onClickHandle() {
-    console.log('onClickHandle');
+    // console.log('onClickHandle');
     dispatch(increment());
   }
 
@@ -100,6 +102,7 @@ function App() {
         <Lists arrs={arr} />
         <p>two</p>
       </div>
+      <Root />
     </div>
   );
 }

@@ -33,10 +33,10 @@ export const isLoading = () => {
 
 export const decrementByValueAsnc = (value) => {
     return dispatch => {
-        console.log('start dispatch');
+        // console.log('start dispatch');
         dispatch(isLoading());
         setTimeout(() => {
-            console.log('stop dispatch');
+            // console.log('stop dispatch');
             dispatch(isLoading());
             dispatch(decrementByValue(value));
         }, 3000);
@@ -52,7 +52,7 @@ export const loadAPIData = () => {
                 .then(jsonData => {
                     // Second Action Dispatch
                     dispatch({ type: 'LOADED', payload: jsonData });
-                    console.log({ jsonData });
+                    // console.log({ jsonData });
                 })
                 .catch(err => {
                     // Third Action Dispatch

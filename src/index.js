@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
@@ -9,14 +8,34 @@ import logger from 'redux-logger'
 import rootReducer from './reducers';
 import App from './App';
 
+
+const logAction = store => {
+    return next => {
+        return action => {
+            const result = next(action);
+            console.log(result);
+            console.log(store.getState());
+            return result;
+        };
+    };
+};
+
+
+const ownLogger = store => next => action => {
+    console.log('dispatching', action);
+    let result = next(action);
+    console.log('next state', store.getState());
+    return result;
+};
+
 // STORE
 const store = createStore(
     rootReducer,
-    compose(applyMiddleware(logger, thunk),
+    compose(applyMiddleware(logger, thunk, logAction, ownLogger),
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
 
 
-console.log({ store });
+// console.log({ store });
 
 /**
 
