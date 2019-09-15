@@ -30,12 +30,18 @@ const configureStore = () => {
     // this will work on both firefox and chrome
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+    const middlewares = [thunk]; // all environment middleware
+    if (process.env.NODE_ENV !== 'production') {
+        // not production mode middlewares
+        middlewares.push(logger, logAction, ownLogger);
+    }
+
     // STORE
     const store = createStore(
         rootReducer,
         persistedState, // initial store values (it will override the rootReducer state values)
         composeEnhancers(
-            applyMiddleware(logger, thunk, logAction, ownLogger) // middleware for logging, thunk...
+            applyMiddleware(...middlewares) // middleware for logging, thunk...
         )
     );
 
