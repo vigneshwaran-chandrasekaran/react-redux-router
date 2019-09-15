@@ -1,46 +1,34 @@
-// ACTION
-export const increment = () => {
-    return {
-        type: 'INCREMENT'
-    };
-};
+// ACTIONS
 
-export const incrementByValue = (value) => {
-    return {
-        type: 'INCREMENT_BY_VALUE',
-        payload: value
-    };
-};
+export const increment = () => ({
+    type: 'INCREMENT'
+});
 
-export const decrement = () => {
-    return {
-        type: 'DECREMENT'
-    };
-};
+export const incrementByValue = (value) => ({
+    type: 'INCREMENT_BY_VALUE',
+    payload: value
+});
 
-export const decrementByValue = (value) => {
-    return {
-        type: 'DECREMENT_BY_VALUE',
-        payload: value
-    };
-};
+export const decrement = () => ({
+    type: 'DECREMENT'
+});
 
-export const isLoading = () => {
-    return {
-        type: 'IS_LOADING',
-    };
-};
+export const decrementByValue = (value) => ({
+    type: 'DECREMENT_BY_VALUE',
+    payload: value
+});
 
-export const decrementByValueAsnc = (value) => {
-    return dispatch => {
-        // console.log('start dispatch');
+export const isLoading = () => ({
+    type: 'IS_LOADING'
+});
+
+// simplified thunk action without return keyword
+export const decrementByValueAsnc = value => dispatch => {
+    dispatch(isLoading());
+    setTimeout(() => {
         dispatch(isLoading());
-        setTimeout(() => {
-            // console.log('stop dispatch');
-            dispatch(isLoading());
-            dispatch(decrementByValue(value));
-        }, 3000);
-    };
+        dispatch(decrementByValue(value));
+    }, 3000);
 };
 
 export const loadAPIData = () => {

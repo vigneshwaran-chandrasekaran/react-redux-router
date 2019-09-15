@@ -12,6 +12,8 @@ import {
 } from './actions';
 
 import Root from './pages/Root';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+
 
 function App() {
 
@@ -24,70 +26,60 @@ function App() {
 
   const store = useStore();
 
-  let arr = data.arr;
-  // console.log(data);
-  // console.log({ isLoading });
-  // console.log({ counter });
-  // console.log({ isLogged });
+  console.log({ store });
 
+  let arr = data.arr;
 
   function Lists({ arrs }) {
-    // console.log({ arrs });
     const todoItems = arrs.map((todo) => <li key={todo.id}>{todo.title}</li>);
-
     return (
       <ul>{todoItems}</ul>
     );
   }
 
-
-
   function onClickHandle() {
-    // console.log('onClickHandle');
     dispatch(increment());
   }
 
   return (
     <div className="App">
       <h1 className='text-center'>React and redux {counter}</h1>
+      <ButtonGroup aria-label="Basic example">
+        <button
+          className='btn btn-primary'
+          onClick={onClickHandle}
+        >
+          increment {counter}
+        </button>
 
-      <div>
-        {/* {store.getState()} */}
-      </div>
-      <button
-        className='btn btn-primary'
-        onClick={onClickHandle}
-      >
-        increment {counter}
-      </button>
+        <button
+          className='btn btn-danger'
+          onClick={() => dispatch(decrement())}
+        >
+          decrement {counter}
+        </button>
 
-      <button
-        className='btn btn-danger'
-        onClick={() => dispatch(decrement())}
-      >
-        decrement {counter}
-      </button>
+        <button
+          className='btn btn-primary'
+          onClick={() => dispatch(incrementByValue(5))}
+        >
+          increment by value {counter}
+        </button>
 
-      <button
-        className='btn btn-primary'
-        onClick={() => dispatch(incrementByValue(5))}
-      >
-        increment by value {counter}
-      </button>
-
-      <button
-        className='btn btn-info'
-        onClick={() => dispatch(decrementByValueAsnc(5))}
-      >
-        decrement by value async {counter}
-      </button>
-      <button
-        className='btn btn-warning'
-        onClick={() => dispatch(decrementByValue(5))}
-      >
-        decrement by value {counter}
-      </button>
-      {isLoading && <p>Its loading</p>}
+        <button
+          className='btn btn-info'
+          onClick={() => dispatch(decrementByValueAsnc(5))}
+        >
+          decrement by value async {counter}
+        </button>
+        <button
+          className='btn btn-warning'
+          onClick={() => dispatch(decrementByValue(5))}
+        >
+          decrement by value {counter}
+        </button>
+      </ButtonGroup>
+      <p>{isLoading ? 'Its loading' : null}</p>
 
       <div>
         <button
