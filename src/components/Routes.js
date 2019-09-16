@@ -4,7 +4,7 @@ import Home from './Home';
 import Login from './Login';
 import NotFound from './NotFound';
 
-export default function Root() {
+export default function Routes() {
     return (
         <div>
             <Router>

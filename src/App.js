@@ -11,7 +11,7 @@ import {
   loadAPIData
 } from './actions';
 
-import Root from './pages/Root';
+import Routes from './components/Routes';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 
@@ -94,7 +94,7 @@ function App() {
         <Lists arrs={arr} />
         <p>two</p>
       </div>
-      <Root />
+      <Routes />
     </div>
   );
 }
