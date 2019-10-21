@@ -31,8 +31,9 @@ export const decrementByValueAsnc = value => dispatch => {
     }, 3000);
 };
 
+// thunk action with return keyword
 export const loadAPIData = () => {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(isLoading());
         setTimeout(() => {
             fetch('https://jsonplaceholder.typicode.com/posts?_limit=5')

@@ -88,5 +88,5 @@ export default function SampleRedux() {
                 <p>two</p>
             </div>
         </div>
-    )
+    );
 }

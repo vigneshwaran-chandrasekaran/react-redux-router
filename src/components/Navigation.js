@@ -10,7 +10,7 @@ Table, ButtonGroup, Row, Col, Grid, Panel, FormGroup, FormControl} from 'react-b
 export default function Navigation() {
     return (
         <div>
-            <Navbar collapseOnSelect expand="lg" bg="info" variant="dark">
+            <Navbar collapseOnSelect expand="lg" bg="warning" variant="dark">
                 <Navbar.Brand as={NavLink} to="/">React</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
